@@ -10,7 +10,6 @@ use App\Models\Doctor;
 use App\Services\DoctorService;
 use App\Util\ApiResponse;
 use DoctorDto;
-use Illuminate\Http\Request;
 
 class DoctorController extends Controller
 {

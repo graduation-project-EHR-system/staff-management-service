@@ -13,7 +13,8 @@ class DoctorDto implements DTO{
         public ?string $password,
         public ?int $specializationId,
         public ?bool $isActive,
-        public ?UploadedFile $profilePicture
+        public ?UploadedFile $profilePicture,
+        public ?string $profilePicturePath
     ){}
 
     public function toArray(): array
@@ -26,6 +27,7 @@ class DoctorDto implements DTO{
             'password' => $this->password,
             'specialization_id' => $this->specializationId,
             'is_active' => $this->isActive,
+            'profile_picture_path' => $this->profilePicturePath
         ];
     }
 
