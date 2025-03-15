@@ -17,7 +17,19 @@ class SpecializationFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => $this->faker->randomElement([
+                'Cardiology',
+                'Pediatrics',
+                'Neurology',
+                'Orthopedics',
+                'Dermatology',
+                'Oncology',
+                'Psychiatry',
+                'General Practice',
+                'Surgery',
+                'Endocrinology',
+            ]),
+            'description' => $this->faker->sentence(10),
         ];
     }
 }
