@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Specialization;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Doctor extends Model
 {
@@ -22,5 +23,10 @@ class Doctor extends Model
     public function specialization(): BelongsTo
     {
         return $this->belongsTo(Specialization::class);
+    }
+
+    public function availabilitySlots() : HasMany
+    {
+        return $this->hasMany(AvailabilitySlot::class);
     }
 }
