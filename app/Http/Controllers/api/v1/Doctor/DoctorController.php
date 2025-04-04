@@ -1,6 +1,6 @@
 <?php
+namespace App\Http\Controllers\api\v1\Doctor;
 
-namespace App\Http\Controllers\Doctor;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Doctor\StoreDoctorRequest;

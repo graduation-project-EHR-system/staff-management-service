@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Specialization\SpecializationController;
+use App\Http\Controllers\api\v1\Specialization\SpecializationController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\AuthMiddleware;
 use Illuminate\Support\Facades\Route;

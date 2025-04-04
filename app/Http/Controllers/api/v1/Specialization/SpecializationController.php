@@ -1,6 +1,6 @@
 <?php
+namespace App\Http\Controllers\api\v1\Specialization;
 
-namespace App\Http\Controllers\Specialization;
 
 use App\Data\Specialization\SpecializationDto;
 use App\Http\Requests\Specialization\UpdateSpecializationRequest;
