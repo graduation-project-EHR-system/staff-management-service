@@ -30,8 +30,8 @@ class SpecializationController extends Controller
     public function store(StoreSpecializationRequest $request)
     {
         $specialization = $this->specializationService->create(
-            SpecializationDto::fromRequest(
-                $request
+            SpecializationDto::from(
+                $request->validated()
             )
         );
 
