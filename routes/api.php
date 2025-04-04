@@ -2,10 +2,10 @@
 
 use App\Http\Controllers\Specialization\SpecializationController;
 use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\AuthMiddleware;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware(AdminMiddleware::class)
-    ->withoutMiddleware(AdminMiddleware::class)
+Route::middleware([AuthMiddleware::class, AdminMiddleware::class])
     ->group(function () {
-        Route::apiResource('specializations', SpecializationController::class);
+        Route::apiResource('v1/specializations', SpecializationController::class);
     });
