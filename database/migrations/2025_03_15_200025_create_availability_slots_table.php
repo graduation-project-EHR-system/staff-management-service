@@ -19,8 +19,6 @@ return new class extends Migration
             $table->dateTime('to');
             $table->boolean('is_available');
             $table->timestamps();
-
-            $table->checkConstraint('end_time > start_time', 'check_time');
         });
     }
 

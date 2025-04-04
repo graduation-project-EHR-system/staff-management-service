@@ -2,9 +2,9 @@
 
 namespace App\Services;
 
+use App\Data\Specialization\SpecializationDto;
 use App\Models\Specialization;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use SpecializationDto;
 
 class SpecializationService
 {

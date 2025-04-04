@@ -7,5 +7,5 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware([AuthMiddleware::class, AdminMiddleware::class])
     ->group(function () {
-        Route::apiResource('v1/specializations', SpecializationController::class);
+        Route::apiResource('specializations', SpecializationController::class);
     });

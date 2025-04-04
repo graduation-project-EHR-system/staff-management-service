@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Specialization;
 
+use App\Data\Specialization\SpecializationDto;
 use App\Http\Requests\Specialization\UpdateSpecializationRequest;
 use App\Services\SpecializationService;
 use App\Util\ApiResponse;
@@ -10,7 +11,6 @@ use App\Models\Specialization;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Specialization\StoreSpecializationRequest;
 use App\Http\Resources\Specialization\SpecializationResource;
-use SpecializationDto;
 
 class SpecializationController extends Controller
 {
@@ -55,7 +55,12 @@ class SpecializationController extends Controller
     public function update(UpdateSpecializationRequest $request, Specialization $specialization)
     {
         $specialization = $this->specializationService->update(
-            SpecializationDto::fromRequest($request),
+            SpecializationDto::from(
+                array_merge(
+                    $specialization->toArray(),
+                    $request->validated(),
+                )
+            ),
             $specialization
         );
 
