@@ -1,8 +1,6 @@
 <?php
 namespace App\Data\Specialization;
 
-use App\Data\DTO;
-use Illuminate\Http\Request;
 use Spatie\LaravelData\Data;
 
 

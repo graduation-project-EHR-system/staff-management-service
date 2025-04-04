@@ -9,7 +9,6 @@ use Closure;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class AuthMiddleware
@@ -24,7 +23,10 @@ class AuthMiddleware
         $token = $request->bearerToken();
 
         if (!$token) {
-            return response()->json(['error' => 'Unauthorized'], Response::HTTP_UNAUTHORIZED);
+            return ApiResponse::send(
+                code: Response::HTTP_UNAUTHORIZED,
+                message: 'Unauthorized'
+            );
         }
 
         try {
@@ -42,7 +44,6 @@ class AuthMiddleware
                     role: UserRole::from($decoded->Role)
                 )
             );
-
 
             return $next($request);
         } catch (\Exception $e) {

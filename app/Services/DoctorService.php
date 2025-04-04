@@ -16,7 +16,7 @@ class DoctorService
 
     public function getPaginated(int $perPage = 15): LengthAwarePaginator
     {
-        return Doctor::paginate($perPage);
+        return Doctor::with('schedules')->paginate($perPage);
     }
 
     public function create(DoctorDto $doctorDto): Doctor
@@ -59,7 +59,7 @@ class DoctorService
             $doctor->profile_picture_path,
             StoragePath::DOCTOR_PROFILE_PICTURES
         );
-        
+
         $doctor->delete();
     }
 }
