@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Clinic;
 use App\Models\Doctor;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -12,12 +13,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('availability_slots', function (Blueprint $table) {
+        Schema::create('doctor_availabilities', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Doctor::class);
-            $table->dateTime('from');
-            $table->dateTime('to');
-            $table->boolean('is_available');
+            $table->foreignIdFor(Clinic::class);
+            $table->date('date');
+            $table->time('from');
+            $table->time('to');
             $table->timestamps();
         });
     }
@@ -27,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('availability_slots');
+        Schema::dropIfExists('doctor_availabilities');
     }
 };

@@ -25,9 +25,11 @@ return Application::configure(basePath: dirname(__DIR__))
     })
     ->withExceptions(function (Exceptions $exceptions) {
         $exceptions->renderable(function (NotFoundHttpException $e) {
-            return ApiResponse::send(
-                code: Response::HTTP_NOT_FOUND,
-                message: 'Model not found.'
-            );
+            if ($e->getPrevious() instanceof ModelNotFoundException) {
+                return ApiResponse::send(
+                    code: Response::HTTP_NOT_FOUND,
+                    message: 'Model not found.'
+                );
+            }
         });
     })->create();

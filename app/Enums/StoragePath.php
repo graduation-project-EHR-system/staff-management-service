@@ -8,7 +8,7 @@ enum StoragePath : string {
     public function getFullPath(): string
     {
         return match($this){
-            self::DOCTOR_PROFILE_PICTURES => 'public' . $this->value
+            self::DOCTOR_PROFILE_PICTURES => 'public/' . $this->value
         };
     }
 }

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class Clinic extends Model
 {
@@ -19,11 +20,15 @@ class Clinic extends Model
         'is_active',
     ];
 
-    public function doctors(): BelongsToMany
+    public function doctors(): HasManyThrough
     {
-        return $this->belongsToMany(
+        return $this->hasManyThrough(
             Doctor::class,
-            'doctor_schedule'
-        )->distinct();
+            DoctorAvailability::class,
+            'clinic_id',
+            'id',
+            'id',
+            'doctor_id'
+        );
     }
 }

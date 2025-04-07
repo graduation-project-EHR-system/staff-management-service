@@ -3,6 +3,9 @@ namespace App\Util\Storage;
 
 use App\Enums\StoragePath;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use InvalidArgumentException;
 
 class StorageManager
 {
@@ -97,6 +100,8 @@ class StorageManager
      */
     public static function getUrl(string $filePath): string
     {
+        $filePath = Str::startsWith($filePath, '/') ? $filePath : '/' . $filePath;
+
         return Storage::disk('public')->url($filePath);
     }
 

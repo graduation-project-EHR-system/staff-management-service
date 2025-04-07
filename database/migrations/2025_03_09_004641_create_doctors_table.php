@@ -18,10 +18,10 @@ return new class extends Migration
             $table->string('last_name' , 50);
             $table->string('email' , 100);
             $table->string('phone' , 15);
-            $table->string('password');
             $table->foreignIdFor(Specialization::class);
             $table->boolean('is_active')->default(true);
             $table->string('profile_picture_path')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
