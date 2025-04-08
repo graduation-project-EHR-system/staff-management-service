@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\EnforeceJsonResponseForApiRequests;
 use App\Util\ApiResponse;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Route;
@@ -22,6 +23,9 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         //
+        $middleware->append(
+            EnforeceJsonResponseForApiRequests::class
+        );
     })
     ->withExceptions(function (Exceptions $exceptions) {
         $exceptions->renderable(function (NotFoundHttpException $e) {
@@ -31,5 +35,12 @@ return Application::configure(basePath: dirname(__DIR__))
                     message: 'Model not found.'
                 );
             }
+        });
+
+        $exceptions->renderable(function (Exception $e) {
+            return ApiResponse::send(
+                message: $e->getMessage(),
+                code: is_int($e->getCode()) ? $e->getCode() : Response::HTTP_INTERNAL_SERVER_ERROR
+            );
         });
     })->create();

@@ -22,6 +22,8 @@ class DoctorAvailabilityResource extends JsonResource
             'to' => $this->to,
             'clinic' => new ClinicResource($this->whenLoaded('clinic')),
             'doctor' => new DoctorResource($this->whenLoaded('doctor')),
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
         ];
     }
 }

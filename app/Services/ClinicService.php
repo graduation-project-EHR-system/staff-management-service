@@ -23,4 +23,27 @@ class ClinicService
     {
         return Clinic::create($clinicDto->toArray());
     }
+
+    public function getById(int $clinicId): Clinic
+    {
+        return Clinic::findOrFail($clinicId);
+    }
+
+    public function isActive(int $clinicId): bool
+    {
+        return $this->getById($clinicId)->is_active;
+    }
+
+    public function canHoldMoreDoctors(int $clinicId): bool
+    {
+        $clinic = $this->getById($clinicId);
+
+        return $clinic->current_doctors < $clinic->max_doctors;
+    }
+
+    public function hasDoctor(int $clinicId, int $doctorId): bool
+    {
+        return $this->getById($clinicId)
+            ->hasDoctor($doctorId);
+    }
 }
