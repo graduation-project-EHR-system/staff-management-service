@@ -37,10 +37,10 @@ return Application::configure(basePath: dirname(__DIR__))
             }
         });
 
-        $exceptions->renderable(function (Exception $e) {
-            return ApiResponse::send(
-                message: $e->getMessage(),
-                code: is_int($e->getCode()) ? $e->getCode() : Response::HTTP_INTERNAL_SERVER_ERROR
-            );
-        });
+        // $exceptions->renderable(function (Exception $e) {
+        //     return ApiResponse::send(
+        //         message: $e->getMessage(),
+        //         code: is_int($e->getCode()) ? $e->getCode() : Response::HTTP_INTERNAL_SERVER_ERROR
+        //     );
+        // });
     })->create();
