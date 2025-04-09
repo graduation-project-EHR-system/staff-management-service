@@ -23,9 +23,11 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 
 RUN composer install
 
+RUN touch /var/www/html/storage/logs/laravel.log
+
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
-RUN chmod -R 777 /var/www/html/storage /var/www/html/bootstrap/cache
+RUN chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 
