@@ -43,7 +43,7 @@ class DoctorController extends Controller
             data: new DoctorResource(
                 $this->doctorService->getById(
                     $id,
-                    ['upcomingAvailabilities', 'upcomingAvailabilities.clinic']
+                    ['upcomingAvailabilities', 'upcomingAvailabilities.clinic', 'specialization']
                 )
             )
         );
