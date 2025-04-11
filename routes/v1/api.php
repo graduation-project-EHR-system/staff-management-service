@@ -13,10 +13,6 @@ Route::middleware([AuthMiddleware::class, AdminMiddleware::class])
         Route::apiResource('specializations', SpecializationController::class);
         Route::apiResource('clinics', ClinicController::class);
 
-        Route::prefix('doctors')
-            ->group(function () {
-                Route::apiResource('/', DoctorController::class);
-
-                Route::apiResource('{doctor}/availabilities', DoctorAvailabilityController::class);
-            });
+        Route::apiResource('doctors', DoctorController::class);
+        Route::apiResource('doctors/{doctor}/availabilities', DoctorAvailabilityController::class);
     });
