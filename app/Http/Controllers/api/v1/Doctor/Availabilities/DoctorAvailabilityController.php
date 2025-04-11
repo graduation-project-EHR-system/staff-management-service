@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\api\v1\Doctor\Availabilities;
 
 use App\Data\DoctorAvailability\DoctorAvailabilityDto;
+use App\Exceptions\DoctorAvailability\InvalidAvailabilityException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DoctorAvailability\StoreDoctorAvailability;
 use App\Http\Resources\Doctor\DoctorAvailabilityResource;
 use App\Services\DoctorAvailabilityService;
 use App\Services\DoctorService;
 use App\Util\ApiResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 class DoctorAvailabilityController extends Controller
 {
@@ -43,15 +45,22 @@ class DoctorAvailabilityController extends Controller
 
     public function store(int $doctorId, StoreDoctorAvailability $request)
     {
-        $doctor = $this->doctorService->getById($doctorId);
+        try {
+            $doctor = $this->doctorService->getById($doctorId);
 
-        $doctorAvailabilityDto = DoctorAvailabilityDto::from($request->validated());
+            $doctorAvailabilityDto = DoctorAvailabilityDto::from($request->validated());
 
-        $doctorAvailability = $this->doctorAvailabilityService->createForDoctor($doctorAvailabilityDto, $doctor);
+            $doctorAvailability = $this->doctorAvailabilityService->createForDoctor($doctorAvailabilityDto, $doctor);
 
-        return ApiResponse::created(
-            message: 'Doctor availability created successfully.',
-            data: new DoctorAvailabilityResource($doctorAvailability)
-        );
+            return ApiResponse::created(
+                message: 'Doctor availability created successfully.',
+                data: new DoctorAvailabilityResource($doctorAvailability)
+            );
+        } catch (InvalidAvailabilityException $e) {
+            return ApiResponse::send(
+                message: $e->getMessage(),
+                code: Response::HTTP_BAD_REQUEST
+            );
+        }
     }
 }
