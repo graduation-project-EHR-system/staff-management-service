@@ -34,7 +34,7 @@ class AuthMiddleware
 
             $decoded = JWT::decode($token, new Key($secretKey, 'HS256'));
 
-            $request->user = $decoded;
+            $request->attributes->set('user', $decoded);
 
             app()->instance(AuthUser::class,
                 new AuthUser(

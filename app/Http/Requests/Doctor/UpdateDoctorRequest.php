@@ -24,8 +24,8 @@ class UpdateDoctorRequest extends FormRequest
         return [
             'first_name' => ['nullable', 'string', 'max:50'],
             'last_name' => ['nullable', 'string', 'max:50'],
-            'email' => ['nullable', 'email', 'unique:doctors,email,' . $this->doctor->id],
-            'phone' => ['nullable', 'string', 'max:15', 'unique:doctors,phone,' . $this->doctor->id],
+            'email' => ['nullable', 'email', 'unique:doctors,email,' . ($this->route('doctor') && is_object($this->route('doctor')) ? $this->route('doctor')->id : '')],
+            'phone' => ['nullable', 'string', 'max:15', 'unique:doctors,phone,' . ($this->route('doctor') && is_object($this->route('doctor')) ? $this->route('doctor')->id : '')],
             'specialization_id' => ['nullable', 'exists:specializations,id'],
             'is_active' => ['nullable', 'boolean'],
             'profile_picture' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],

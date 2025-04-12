@@ -19,7 +19,9 @@ class DoctorController extends Controller
     public function index()
     {
         return ApiResponse::success(
-            data: $this->doctorService->getPaginated(),
+            data: $this->doctorService->getPaginated(
+                with: ['specialization']
+            ),
             resource: DoctorResource::class
         );
     }

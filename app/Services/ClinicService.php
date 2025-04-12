@@ -9,7 +9,7 @@ class ClinicService
 {
     public function getPaginated(int $perPage = 15): LengthAwarePaginator
     {
-        return Clinic::paginate($perPage);
+        return Clinic::query()->paginate($perPage);
     }
 
     public function update(ClinicDto $clinicDto, Clinic $clinic): Clinic
@@ -21,12 +21,12 @@ class ClinicService
 
     public function create(ClinicDto $clinicDto): Clinic
     {
-        return Clinic::create($clinicDto->toArray());
+        return Clinic::query()->create($clinicDto->toArray());
     }
 
     public function getById(int $clinicId): Clinic
     {
-        return Clinic::findOrFail($clinicId);
+        return Clinic::query()->findOrFail($clinicId);
     }
 
     public function isActive(int $clinicId): bool

@@ -22,7 +22,7 @@ class UpdateClinicRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['nullable', 'string', 'min:3', 'unique:clinics,name,' . $this->clinic->id, 'max:50'],
+            'name' => ['nullable', 'string', 'min:3', 'unique:clinics,name,' . ($this->route('clinic') && is_object($this->route('clinic')) ? $this->route('clinic')->id : ''), 'max:50'],
             'description' => ['nullable', 'string', 'min:3', 'max:255'],
             'max_doctors' => ['nullable', 'integer', 'min:0'],
             'is_active' => ['nullable', 'boolean'],

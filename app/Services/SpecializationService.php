@@ -12,14 +12,14 @@ class SpecializationService
         int $perPage = 15
     ): LengthAwarePaginator
     {
-        return Specialization::paginate($perPage);
+        return Specialization::query()->paginate($perPage);
     }
 
     public function create(
         SpecializationDto $specializationDto
     ) : Specialization
     {
-        return Specialization::create($specializationDto->toArray());
+        return Specialization::query()->create($specializationDto->toArray());
     }
 
     public function update(

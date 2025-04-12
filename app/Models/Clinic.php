@@ -7,6 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
+/**
+ *
+ * @property bool $is_active
+ * @property int $current_doctors
+ * @property int $max_doctors
+ */
 class Clinic extends Model
 {
     /** @use HasFactory<\Database\Factories\ClinicFactory> */

@@ -15,10 +15,11 @@ class SpecializationResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'name' => $this->name,
-            'description' => $this->description,
-            'createdAt' => $this->created_at,
-            'updatedAt' => $this->updated_at
+            'name' => $this->resource->name,
+            'description' => $this->resource->description,
+            'color' => $this->resource->color,
+            'createdAt' => $this->resource->created_at,
+            'updatedAt' => $this->resource->updated_at
         ];
     }
 }

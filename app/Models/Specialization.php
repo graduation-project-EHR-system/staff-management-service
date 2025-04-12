@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\SpecializationColor;
 use App\Models\Doctor;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -14,7 +15,12 @@ class Specialization extends Model
 
     protected $fillable = [
         'name',
-        'description'
+        'description',
+        'color'
+    ];
+
+    protected $casts = [
+        'color' => SpecializationColor::class,
     ];
 
     public function doctors(): HasMany

@@ -37,7 +37,7 @@ class DoctorService
             );
         }
 
-        return Doctor::create($doctorDto->toArray());
+        return Doctor::query()->create($doctorDto->toArray());
     }
 
     public function update(

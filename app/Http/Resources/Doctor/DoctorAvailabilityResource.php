@@ -16,14 +16,14 @@ class DoctorAvailabilityResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->id,
-            'date' => $this->date,
-            'from' => $this->from,
-            'to' => $this->to,
+            'id' => $this->resource->id,
+            'date' => $this->resource->date,
+            'from' => $this->resource->from,
+            'to' => $this->resource->to,
             'clinic' => new ClinicResource($this->whenLoaded('clinic')),
             'doctor' => new DoctorResource($this->whenLoaded('doctor')),
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            'created_at' => $this->resource->created_at,
+            'updated_at' => $this->resource->updated_at,
         ];
     }
 }

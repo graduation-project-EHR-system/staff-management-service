@@ -39,8 +39,8 @@ class ApiResponse
         return [
             'current_page' => $paginator->currentPage(),
             'per_page' => $paginator->perPage(),
-            'total' => $paginator->total(),
-            'last_page' => $paginator->lastPage(),
+            'total' => method_exists($paginator, 'total') ? $paginator->total() : null,
+            'last_page' => method_exists($paginator, 'lastPage') ? $paginator->lastPage() : null,
         ];
     }
 

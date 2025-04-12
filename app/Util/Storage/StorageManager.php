@@ -95,14 +95,14 @@ class StorageManager
      * Get the URL for a stored file
      *
      * @param string $filePath
-     * @param StoragePath $path
+     * @param string $filePath
      * @return string
      */
     public static function getUrl(string $filePath): string
     {
         $filePath = Str::startsWith($filePath, '/') ? $filePath : '/' . $filePath;
 
-        return Storage::disk('public')->url($filePath);
+        return config('filesystems.disks.public.url') . $filePath;
     }
 
     /**
