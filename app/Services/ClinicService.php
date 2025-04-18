@@ -24,6 +24,11 @@ class ClinicService
         return Clinic::query()->create($clinicDto->toArray());
     }
 
+    public function delete(Clinic $clinic): void
+    {
+        $clinic->delete();
+    }
+
     public function getById(int $clinicId): Clinic
     {
         return Clinic::query()->findOrFail($clinicId);

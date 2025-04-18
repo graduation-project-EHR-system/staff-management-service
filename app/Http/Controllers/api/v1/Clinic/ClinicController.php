@@ -62,4 +62,11 @@ class ClinicController extends Controller
             data: new ClinicResource($clinic),
         );
     }
+
+    public function destroy(Clinic $clinic)
+    {
+        $this->clinicService->delete($clinic);
+
+        return ApiResponse::success(message: 'Clinic deleted successfully');
+    }
 }
