@@ -22,7 +22,9 @@ class ClinicController extends Controller
     {
         return ApiResponse::success(
             message: 'Clinics returned successfully',
-            data: $this->clinicService->getPaginated(),
+            data: $this->clinicService->getPaginated(
+                filters: $request->all()
+            ),
             resource: ClinicResource::class
         );
     }

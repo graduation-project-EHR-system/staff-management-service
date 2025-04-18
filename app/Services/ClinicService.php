@@ -7,9 +7,11 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class ClinicService
 {
-    public function getPaginated(int $perPage = 15): LengthAwarePaginator
+    public function getPaginated(int $perPage = 15, array $filters = []): LengthAwarePaginator
     {
-        return Clinic::query()->paginate($perPage);
+        return Clinic::query()
+            ->filter($filters)
+            ->paginate($perPage);
     }
 
     public function update(ClinicDto $clinicDto, Clinic $clinic): Clinic

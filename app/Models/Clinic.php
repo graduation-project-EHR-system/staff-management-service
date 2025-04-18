@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use EloquentFilter\Filterable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -16,7 +17,7 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 class Clinic extends Model
 {
     /** @use HasFactory<\Database\Factories\ClinicFactory> */
-    use HasFactory;
+    use HasFactory, Filterable;
 
     protected $fillable = [
         'name',
