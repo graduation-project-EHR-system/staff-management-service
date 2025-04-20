@@ -3,18 +3,13 @@
 namespace App\Services;
 
 use App\Data\Doctor\DoctorDto;
-use App\Enums\StoragePath;
+use App\Enums\KafkaTopic;
 use App\Models\Doctor;
-use App\Util\Storage\StorageManager;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Junges\Kafka\Facades\Kafka;
 
 class DoctorService
 {
-    public function __construct(
-        protected StorageManager $storageManager
-    ) {}
-
     public function getPaginated(
         int $perPage = 15,
         array $with = []
@@ -31,7 +26,14 @@ class DoctorService
 
     public function create(DoctorDto $doctorDto): Doctor
     {
-        return Doctor::query()->create($doctorDto->toArray());
+        $doctor = Doctor::query()->create($doctorDto->toArray());
+
+        Kafka::publish()
+            ->onTopic(KafkaTopic::DOCTORS_CREATE->value)
+            ->withBody(json_encode($doctor))
+            ->send();
+
+        return $doctor;
     }
 
     public function update(
@@ -40,18 +42,20 @@ class DoctorService
     ): Doctor {
         $doctor->update($doctorDto->toArray());
 
+        Kafka::publish()
+            ->onTopic(KafkaTopic::DOCTORS_UPDATE->value)
+            ->withBody(json_encode($doctor))
+            ->send();
+
         return $doctor->fresh();
     }
 
     public function delete(Doctor $doctor): void
     {
         $doctor->delete();
-    }
 
-    public function publishDoctorCreatedMessage(Doctor $doctor): void
-    {
         Kafka::publish()
-            ->onTopic('doctor-created')
+            ->onTopic(KafkaTopic::DOCTORS_DELETE->value)
             ->withBody(json_encode($doctor))
             ->send();
     }

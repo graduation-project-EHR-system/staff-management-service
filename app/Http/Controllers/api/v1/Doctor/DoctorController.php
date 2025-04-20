@@ -33,8 +33,6 @@ class DoctorController extends Controller
             DoctorDto::from($request->validated())
         );
 
-        $this->doctorService->publishDoctorCreatedMessage($doctor);
-
         return ApiResponse::created(
             message: 'Doctor created successfully.',
             data: new DoctorResource($doctor->load('specialization')),
