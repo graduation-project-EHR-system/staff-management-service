@@ -9,8 +9,7 @@ class ClinicService
 {
     public function getPaginated(int $perPage = 15, array $filters = []): LengthAwarePaginator
     {
-        return Clinic::query()
-            ->filter($filters)
+        return Clinic::filter($filters)
             ->paginate($perPage);
     }
 
