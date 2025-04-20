@@ -9,6 +9,7 @@ use App\Http\Resources\Doctor\DoctorResource;
 use App\Models\Doctor;
 use App\Services\DoctorService;
 use App\Util\ApiResponse;
+use Junges\Kafka\Facades\Kafka;
 
 class DoctorController extends Controller
 {
@@ -31,6 +32,8 @@ class DoctorController extends Controller
         $doctor = $this->doctorService->create(
             DoctorDto::from($request->validated())
         );
+
+        $this->doctorService->publishDoctorCreatedMessage($doctor);
 
         return ApiResponse::created(
             message: 'Doctor created successfully.',

@@ -21,7 +21,6 @@ class DoctorResource extends JsonResource
             'last_name' => $this->resource->last_name,
             'email' => $this->resource->email,
             'phone' => $this->resource->phone,
-            'profile_picture' => $this->resource->profile_picture_url,
             'specialization' => new SpecializationResource($this->whenLoaded('specialization')),
             'availabilities' => DoctorAvailabilityResource::collection($this->whenLoaded('upcomingAvailabilities')),
             'created_at' => $this->resource->created_at,

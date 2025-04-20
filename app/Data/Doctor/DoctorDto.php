@@ -20,11 +20,6 @@ class DoctorDto extends Data{
         #[MapInputName('specialization_id')]
         #[MapOutputName('specialization_id')]
         public ?int $specializationId,
-        #[MapInputName('profile_picture')]
-        public ?UploadedFile $profilePicture,
-        #[MapInputName('profile_picture_path')]
-        #[MapOutputName('profile_picture_path')]
-        public ?string $profilePicturePath,
         #[MapInputName('is_active')]
         #[MapOutputName('is_active')]
         public ?bool $isActive = true,

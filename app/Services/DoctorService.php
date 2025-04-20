@@ -7,6 +7,7 @@ use App\Enums\StoragePath;
 use App\Models\Doctor;
 use App\Util\Storage\StorageManager;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Junges\Kafka\Facades\Kafka;
 
 class DoctorService
 {
@@ -30,13 +31,6 @@ class DoctorService
 
     public function create(DoctorDto $doctorDto): Doctor
     {
-        if ($doctorDto->profilePicture) {
-            $doctorDto->profilePicturePath = $this->storageManager->store(
-                $doctorDto->profilePicture,
-                StoragePath::DOCTOR_PROFILE_PICTURES
-            );
-        }
-
         return Doctor::query()->create($doctorDto->toArray());
     }
 
@@ -44,19 +38,6 @@ class DoctorService
         DoctorDto $doctorDto,
         Doctor $doctor
     ): Doctor {
-
-        if ($doctorDto->profilePicture) {
-            $this->storageManager->delete(
-                $doctor->profile_picture_path,
-                StoragePath::DOCTOR_PROFILE_PICTURES
-            );
-
-            $doctorDto->profilePicturePath = $this->storageManager->store(
-                $doctorDto->profilePicture,
-                StoragePath::DOCTOR_PROFILE_PICTURES
-            );
-        }
-
         $doctor->update($doctorDto->toArray());
 
         return $doctor->fresh();
@@ -65,5 +46,13 @@ class DoctorService
     public function delete(Doctor $doctor): void
     {
         $doctor->delete();
+    }
+
+    public function publishDoctorCreatedMessage(Doctor $doctor): void
+    {
+        Kafka::publish()
+            ->onTopic('doctor-created')
+            ->withBody(json_encode($doctor))
+            ->send();
     }
 }

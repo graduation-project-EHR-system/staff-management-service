@@ -23,10 +23,8 @@ class DoctorFactory extends Factory
             'last_name' => $this->faker->lastName(),
             'email' => $this->faker->unique()->safeEmail(),
             'phone' => $this->faker->phoneNumber(),
-            'password' => Hash::make('password123'),
             'specialization_id' => Specialization::factory()->create(),
             'is_active' => $this->faker->boolean(chanceOfGettingTrue: 90),
-            'profile_picture_path' => $this->faker->optional()->imageUrl(200, 200, 'people'),
         ];
     }
 }

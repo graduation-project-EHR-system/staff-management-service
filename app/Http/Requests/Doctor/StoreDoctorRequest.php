@@ -28,7 +28,6 @@ class StoreDoctorRequest extends FormRequest
             'phone' => ['required', 'string', 'max:15', 'unique:doctors,phone'],
             'specialization_id' => ['required', 'exists:specializations,id'],
             'is_active' => ['nullable', 'boolean'],
-            'profile_picture' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
         ];
     }
 }

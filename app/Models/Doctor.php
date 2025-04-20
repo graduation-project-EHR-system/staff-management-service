@@ -3,17 +3,14 @@
 namespace App\Models;
 
 use App\Models\Specialization;
-use App\Util\Storage\StorageManager;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @property int $id
- * @property-read string|null $profile_picture_path
  */
 class Doctor extends Model
 {
@@ -26,15 +23,7 @@ class Doctor extends Model
         'phone',
         'specialization_id',
         'is_active',
-        'profile_picture_path'
     ];
-
-    public function getProfilePictureUrlAttribute(): string|null
-    {
-        return $this->profile_picture_path
-            ? StorageManager::getUrl($this->profile_picture_path)
-            : null;
-    }
 
     public function specialization(): BelongsTo
     {
