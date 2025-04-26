@@ -19,7 +19,7 @@ class DoctorDto extends Data{
         public ?string $phone,
         #[MapInputName('specialization_id')]
         #[MapOutputName('specialization_id')]
-        public ?int $specializationId,
+        public ?string $specializationId,
         #[MapInputName('is_active')]
         #[MapOutputName('is_active')]
         public ?bool $isActive = true,

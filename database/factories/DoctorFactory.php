@@ -23,7 +23,7 @@ class DoctorFactory extends Factory
             'last_name' => $this->faker->lastName(),
             'email' => $this->faker->unique()->safeEmail(),
             'phone' => $this->faker->phoneNumber(),
-            'specialization_id' => Specialization::factory()->create(),
+            'specialization_id' => Specialization::query()->inRandomOrder()->first()->id,
             'is_active' => $this->faker->boolean(chanceOfGettingTrue: 90),
         ];
     }

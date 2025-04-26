@@ -14,9 +14,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('doctor_availabilities', function (Blueprint $table) {
-            $table->id();
-            $table->foreignIdFor(Doctor::class);
-            $table->foreignIdFor(Clinic::class);
+            $table->uuid('id')->primary();
+            $table->foreignUuid('doctor_id')->constrained('doctors');
+            $table->foreignUuid('clinic_id')->constrained('clinics');
             $table->date('date');
             $table->time('from');
             $table->time('to');

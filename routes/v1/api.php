@@ -14,5 +14,6 @@ Route::middleware([AuthMiddleware::class, AdminMiddleware::class])
         Route::apiResource('clinics', ClinicController::class);
 
         Route::apiResource('doctors', DoctorController::class);
-        Route::apiResource('doctors/{doctor}/availabilities', DoctorAvailabilityController::class);
+        Route::apiResource('doctors/{doctor}/availabilities', DoctorAvailabilityController::class)
+            ->only(['index', 'show', 'store']);
     });

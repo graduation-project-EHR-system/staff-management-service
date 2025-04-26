@@ -12,6 +12,7 @@
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
         "mateusjunges/laravel-kafka": "^2.5",
+        "rakutentech/laravel-request-docs": "^2.42",
         "spatie/laravel-data": "^4.14",
         "tucker-eric/eloquentfilter": "^3.5"
     },

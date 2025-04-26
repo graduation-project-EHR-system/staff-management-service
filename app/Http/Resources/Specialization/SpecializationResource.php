@@ -15,6 +15,7 @@ class SpecializationResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            'id' => $this->resource->id,
             'name' => $this->resource->name,
             'description' => $this->resource->description,
             'color' => $this->resource->color,

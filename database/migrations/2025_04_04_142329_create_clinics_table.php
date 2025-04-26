@@ -12,12 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('clinics', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string('name' , 50);
             $table->string('description');
             $table->integer('current_doctors')->default(0);
             $table->integer('max_doctors')->default(10);
             $table->boolean('is_active')->default(true);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

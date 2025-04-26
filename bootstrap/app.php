@@ -24,7 +24,8 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         //
         $middleware->append(
-            EnforeceJsonResponseForApiRequests::class
+            EnforeceJsonResponseForApiRequests::class,
+            \Rakutentech\LaravelRequestDocs\LaravelRequestDocsMiddleware::class,
         );
     })
     ->withExceptions(function (Exceptions $exceptions) {
