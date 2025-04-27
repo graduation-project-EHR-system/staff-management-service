@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Clinic;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -18,6 +19,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('phone')->unique();
             $table->boolean('is_active')->default(true);
+            $table->foreignUuid('clinic_id')->constrained('clinics');
             $table->softDeletes();
             $table->timestamps();
         });

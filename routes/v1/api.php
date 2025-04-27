@@ -3,6 +3,7 @@
 use App\Http\Controllers\api\v1\Clinic\ClinicController;
 use App\Http\Controllers\api\v1\Doctor\Availabilities\DoctorAvailabilityController;
 use App\Http\Controllers\api\v1\Doctor\DoctorController;
+use App\Http\Controllers\api\v1\Nurse\NurseController;
 use App\Http\Controllers\api\v1\Specialization\SpecializationController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\AuthMiddleware;
@@ -16,4 +17,6 @@ Route::middleware([AuthMiddleware::class, AdminMiddleware::class])
         Route::apiResource('doctors', DoctorController::class);
         Route::apiResource('doctors/{doctor}/availabilities', DoctorAvailabilityController::class)
             ->only(['index', 'show', 'store']);
+
+        Route::apiResource('nurses', NurseController::class);
     });

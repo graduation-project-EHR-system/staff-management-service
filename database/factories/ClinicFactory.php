@@ -1,5 +1,4 @@
 <?php
-
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -17,7 +16,11 @@ class ClinicFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name'            => $this->faker->company(),
+            'description'     => $this->faker->sentence(),
+            'current_doctors' => $this->faker->numberBetween(0, 10),
+            'max_doctors'     => $this->faker->numberBetween(10, 20),
+            'is_active'       => $this->faker->boolean(),
         ];
     }
 }

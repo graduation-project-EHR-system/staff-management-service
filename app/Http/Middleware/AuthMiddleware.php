@@ -30,7 +30,7 @@ class AuthMiddleware
         }
 
         try {
-            $secretKey = env('JWT_SECRET');
+            $secretKey = config('app.jwt_secret');
 
             $decoded = JWT::decode($token, new Key($secretKey, 'HS256'));
 
