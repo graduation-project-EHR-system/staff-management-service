@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
             ClinicSeeder::class,
             DoctorSeeder::class,
             NurseSeeder::class,
+            ReceptionistSeeder::class,
         ]);
     }
 }

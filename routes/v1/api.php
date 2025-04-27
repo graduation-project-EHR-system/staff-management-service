@@ -19,4 +19,5 @@ Route::middleware([AuthMiddleware::class, AdminMiddleware::class])
             ->only(['index', 'show', 'store']);
 
         Route::apiResource('nurses', NurseController::class);
+        Route::apiResource('receptionists', \App\Http\Controllers\api\v1\Receptionist\ReceptionistController::class);
     });

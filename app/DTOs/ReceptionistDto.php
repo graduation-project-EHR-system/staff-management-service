@@ -1,0 +1,30 @@
+<?php
+namespace App\DTOs;
+
+use Spatie\LaravelData\Attributes\Validation\BooleanType;
+use Spatie\LaravelData\Attributes\Validation\Email;
+use Spatie\LaravelData\Attributes\Validation\Max;
+use Spatie\LaravelData\Attributes\Validation\StringType;
+use Spatie\LaravelData\Data;
+use Spatie\LaravelData\Optional;
+
+class ReceptionistDto extends Data
+{
+    public function __construct(
+        #[StringType, Max(255)]
+        public Optional|string $first_name,
+
+        #[StringType, Max(255)]
+        public Optional|string $last_name,
+
+        #[Email, Max(255)]
+        public Optional|string $email,
+
+        #[StringType, Max(255)]
+        public Optional|string $phone,
+
+        #[BooleanType]
+        public Optional|bool $is_active,
+    ) {
+    }
+}
