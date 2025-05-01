@@ -69,8 +69,8 @@ class DoctorService
     {
         return [
             'id' => $doctor->id,
-            'first_name' => $doctor->first_name,
-            'last_name' => $doctor->last_name,
+            'firstName' => $doctor->first_name,
+            'lastName' => $doctor->last_name,
             'email' => $doctor->email,
             'phone' => $doctor->phone,
             'type' => UserRole::DOCTOR->name,

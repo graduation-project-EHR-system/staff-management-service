@@ -67,8 +67,8 @@ class ReceptionistService
     {
         return [
             'id' => $receptionist->id,
-            'first_name' => $receptionist->first_name,
-            'last_name' => $receptionist->last_name,
+            'firstName' => $receptionist->first_name,
+            'lastName' => $receptionist->last_name,
             'email' => $receptionist->email,
             'phone' => $receptionist->phone,
             'type' => UserRole::RECEPTIONIST->name,

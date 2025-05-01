@@ -74,8 +74,8 @@ class NurseService
     {
         return [
             'id' => $nurse->id,
-            'first_name' => $nurse->first_name,
-            'last_name' => $nurse->last_name,
+            'firstName' => $nurse->first_name,
+            'lastName' => $nurse->last_name,
             'email' => $nurse->email,
             'phone' => $nurse->phone,
             'type' => UserRole::NURSE->name,
