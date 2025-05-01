@@ -4,12 +4,17 @@ namespace App\Services;
 
 use App\Data\Doctor\DoctorDto;
 use App\Enums\KafkaTopic;
+use App\Enums\UserRole;
+use App\Interfaces\EventPublisher;
 use App\Models\Doctor;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Junges\Kafka\Facades\Kafka;
 
 class DoctorService
 {
+    public function __construct(
+        protected EventPublisher $eventPublisher
+    ) {}
+
     public function getPaginated(
         int $perPage = 15,
         array $with = []
@@ -28,10 +33,10 @@ class DoctorService
     {
         $doctor = Doctor::query()->create($doctorDto->toArray());
 
-        Kafka::publish()
-            ->onTopic(KafkaTopic::DOCTORS_CREATE->value)
-            ->withBody(json_encode($doctor))
-            ->send();
+        $this->eventPublisher
+            ->onTopic(KafkaTopic::USER_CREATED)
+            ->withBody($this->constructEventBody($doctor))
+            ->publish();
 
         return $doctor;
     }
@@ -42,10 +47,10 @@ class DoctorService
     ): Doctor {
         $doctor->update($doctorDto->toArray());
 
-        Kafka::publish()
-            ->onTopic(KafkaTopic::DOCTORS_UPDATE->value)
-            ->withBody(json_encode($doctor))
-            ->send();
+        $this->eventPublisher
+            ->onTopic(KafkaTopic::USER_UPDATED)
+            ->withBody($this->constructEventBody($doctor))
+            ->publish();
 
         return $doctor->fresh();
     }
@@ -54,9 +59,21 @@ class DoctorService
     {
         $doctor->delete();
 
-        Kafka::publish()
-            ->onTopic(KafkaTopic::DOCTORS_DELETE->value)
-            ->withBody(json_encode($doctor))
-            ->send();
+        $this->eventPublisher
+            ->onTopic(KafkaTopic::USER_DELETED)
+            ->withBody($this->constructEventBody($doctor))
+            ->publish();
+    }
+
+    protected function constructEventBody(Doctor $doctor): array
+    {
+        return [
+            'id' => $doctor->id,
+            'first_name' => $doctor->first_name,
+            'last_name' => $doctor->last_name,
+            'email' => $doctor->email,
+            'phone' => $doctor->phone,
+            'type' => UserRole::DOCTOR->name,
+        ];
     }
 }

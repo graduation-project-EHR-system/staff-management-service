@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Interfaces\EventPublisher;
+use App\Services\KafkaEventPublisher;
 use Dedoc\Scramble\Scramble;
 use Dedoc\Scramble\Support\Generator\OpenApi;
 use Dedoc\Scramble\Support\Generator\SecurityScheme;
@@ -14,7 +16,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->bind(EventPublisher::class, KafkaEventPublisher::class);
     }
 
     /**
