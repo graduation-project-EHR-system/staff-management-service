@@ -71,7 +71,7 @@ class ReceptionistService
             'lastName' => $receptionist->last_name,
             'email' => $receptionist->email,
             'phone' => $receptionist->phone,
-            'type' => UserRole::RECEPTIONIST->name,
+            'role' => UserRole::RECEPTIONIST->name,
         ];
     }
 }

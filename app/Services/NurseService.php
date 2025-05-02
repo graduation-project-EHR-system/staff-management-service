@@ -78,7 +78,7 @@ class NurseService
             'lastName' => $nurse->last_name,
             'email' => $nurse->email,
             'phone' => $nurse->phone,
-            'type' => UserRole::NURSE->name,
+            'role' => UserRole::NURSE->name,
         ];
     }
 }

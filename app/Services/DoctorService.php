@@ -73,7 +73,7 @@ class DoctorService
             'lastName' => $doctor->last_name,
             'email' => $doctor->email,
             'phone' => $doctor->phone,
-            'type' => UserRole::DOCTOR->name,
+            'role' => UserRole::DOCTOR->name,
         ];
     }
 }
