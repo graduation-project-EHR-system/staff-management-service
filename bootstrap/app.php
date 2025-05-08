@@ -23,9 +23,16 @@ return Application::configure(basePath: dirname(__DIR__))
 
             Route::get('/test', function (Request $request) {
                 $clientIp = $request->ip();
-                \Log::info('Client IP: ' . $clientIp);
+                $forwardedIp = $request->header('X-Forwarded-For');
+                $realIp = $request->header('X-Real-IP');
 
-                return "Client IP logged: " . $clientIp;
+                \Log::info('Client IP: ' . $clientIp);
+                \Log::info('X-Forwarded-For: ' . ($forwardedIp ?: 'Not set'));
+                \Log::info('X-Real-IP: ' . ($realIp ?: 'Not set'));
+
+                return "Client IP: " . $clientIp .
+                       "<br>X-Forwarded-For: " . ($forwardedIp ?: 'Not set') .
+                       "<br>X-Real-IP: " . ($realIp ?: 'Not set');
             });
         }
     )
