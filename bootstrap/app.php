@@ -3,6 +3,7 @@
 use App\Http\Middleware\EnforeceJsonResponseForApiRequests;
 use App\Util\ApiResponse;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -19,6 +20,13 @@ return Application::configure(basePath: dirname(__DIR__))
             Route::prefix('api/v1')
                 ->middleware('api')
                 ->group(base_path('routes/v1/api.php'));
+
+            Route::get('/test', function (Request $request) {
+                $clientIp = $request->ip();
+                \Log::info('Client IP: ' . $clientIp);
+
+                return "Client IP logged: " . $clientIp;
+            });
         }
     )
     ->withMiddleware(function (Middleware $middleware) {
