@@ -20,27 +20,12 @@ return Application::configure(basePath: dirname(__DIR__))
             Route::prefix('api/v1')
                 ->middleware('api')
                 ->group(base_path('routes/v1/api.php'));
-
-            Route::get('/test', function (Request $request) {
-                $clientIp = $request->ip();
-                $forwardedIp = $request->header('X-Forwarded-For');
-                $realIp = $request->header('X-Real-IP');
-
-                \Log::info('Client IP: ' . $clientIp);
-                \Log::info('X-Forwarded-For: ' . ($forwardedIp ?: 'Not set'));
-                \Log::info('X-Real-IP: ' . ($realIp ?: 'Not set'));
-
-                return "Client IP: " . $clientIp .
-                       "<br>X-Forwarded-For: " . ($forwardedIp ?: 'Not set') .
-                       "<br>X-Real-IP: " . ($realIp ?: 'Not set');
-            });
         }
     )
     ->withMiddleware(function (Middleware $middleware) {
         //
         $middleware->append(
             EnforeceJsonResponseForApiRequests::class,
-            \Rakutentech\LaravelRequestDocs\LaravelRequestDocsMiddleware::class,
         );
     })
     ->withExceptions(function (Exceptions $exceptions) {
@@ -52,11 +37,4 @@ return Application::configure(basePath: dirname(__DIR__))
                 );
             }
         });
-
-        // $exceptions->renderable(function (Exception $e) {
-        //     return ApiResponse::send(
-        //         message: $e->getMessage(),
-        //         code: is_int($e->getCode()) ? $e->getCode() : Response::HTTP_INTERNAL_SERVER_ERROR
-        //     );
-        // });
     })->create();
