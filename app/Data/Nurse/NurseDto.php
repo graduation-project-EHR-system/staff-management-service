@@ -1,5 +1,5 @@
 <?php
-namespace App\DTOs;
+namespace App\Data\Nurse;
 
 use Spatie\LaravelData\Attributes\Validation\BooleanType;
 use Spatie\LaravelData\Attributes\Validation\Email;

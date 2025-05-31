@@ -29,16 +29,18 @@ class ClinicController extends Controller
         );
     }
 
-    public function show(Clinic $clinic)
+    public function show(string $id)
     {
         return ApiResponse::success(
             message: 'Clinic returned successfully',
-            data: new ClinicResource($clinic->load('doctors')),
+            data: new ClinicResource($this->clinicService->getById($id)->load('doctors')),
         );
     }
 
-    public function update(UpdateClinicRequest $request, Clinic $clinic)
+    public function update(UpdateClinicRequest $request, string $id)
     {
+        $clinic = $this->clinicService->getById($id);
+
         $updatedClinic = $this->clinicService->update(
             ClinicDto::from(
                 array_merge(
@@ -65,9 +67,9 @@ class ClinicController extends Controller
         );
     }
 
-    public function destroy(Clinic $clinic)
+    public function destroy(string $id)
     {
-        $this->clinicService->delete($clinic);
+        $this->clinicService->delete($this->clinicService->getById($id));
 
         return ApiResponse::success(message: 'Clinic deleted successfully');
     }

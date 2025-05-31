@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers\api\v1\Receptionist;
 
-use App\DTOs\ReceptionistDto;
+use App\Data\Receptionist\ReceptionistDto;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreReceptionistRequest;
 use App\Http\Requests\UpdateReceptionistRequest;
@@ -26,9 +26,9 @@ class ReceptionistController extends Controller
         );
     }
 
-    public function show($id)
+    public function show(string $id)
     {
-        $receptionist = $this->receptionistService->find($id);
+        $receptionist = $this->receptionistService->getById($id);
 
         return ApiResponse::success(
             message: 'Receptionist fetched successfully',
@@ -48,13 +48,13 @@ class ReceptionistController extends Controller
         );
     }
 
-    public function update(UpdateReceptionistRequest $request, $id)
+    public function update(UpdateReceptionistRequest $request, string $id)
     {
         $receptionistDto = ReceptionistDto::from($request->validated());
 
         $receptionist    = $this->receptionistService->update(
-            $this->receptionistService->find($id),
-            $receptionistDto
+            $receptionistDto,
+            $this->receptionistService->getById($id)
         );
 
         return ApiResponse::success(
@@ -63,10 +63,10 @@ class ReceptionistController extends Controller
         );
     }
 
-    public function destroy($id)
+    public function destroy(string $id)
     {
         $this->receptionistService->delete(
-            $this->receptionistService->find($id)
+            $this->receptionistService->getById($id)
         );
 
         return ApiResponse::success(

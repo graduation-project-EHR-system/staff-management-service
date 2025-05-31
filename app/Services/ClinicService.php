@@ -3,36 +3,49 @@ namespace App\Services;
 
 use App\Data\Clinic\ClinicDto;
 use App\Models\Clinic;
+use App\Repositories\ClinicRepository;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class ClinicService
 {
-    public function getPaginated(int $perPage = 15, array $filters = []): LengthAwarePaginator
-    {
-        return Clinic::filter($filters)
-            ->paginate($perPage);
+    public function __construct(
+        protected ClinicRepository $clinicRepository
+    ) {}
+
+    public function getPaginated(
+        int $perPage = 15,
+        array $with = [],
+        array $filters = []
+    ): LengthAwarePaginator {
+        return $this->clinicRepository->getPaginated($perPage, $with, $filters);
     }
 
-    public function update(ClinicDto $clinicDto, Clinic $clinic): Clinic
-    {
-        $clinic->update($clinicDto->toArray());
-
-        return $clinic->fresh();
+    public function getById(
+        string $id,
+        array $with = []
+    ): Clinic {
+        return $this->clinicRepository->getById($id, $with);
     }
 
     public function create(ClinicDto $clinicDto): Clinic
     {
-        return Clinic::query()->create($clinicDto->toArray());
+        $clinic = $this->clinicRepository->create($clinicDto);
+
+        return $clinic;
+    }
+
+    public function update(
+        ClinicDto $clinicDto,
+        Clinic $clinic
+    ): Clinic {
+        $clinic = $this->clinicRepository->update($clinic, $clinicDto);
+
+        return $clinic;
     }
 
     public function delete(Clinic $clinic): void
     {
-        $clinic->delete();
-    }
-
-    public function getById(int $clinicId): Clinic
-    {
-        return Clinic::query()->findOrFail($clinicId);
+        $this->clinicRepository->delete($clinic);
     }
 
     public function isActive(int $clinicId): bool

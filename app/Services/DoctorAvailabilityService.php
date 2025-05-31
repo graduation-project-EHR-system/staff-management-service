@@ -16,7 +16,7 @@ class DoctorAvailabilityService
     ) {}
 
     public function getForDoctorPaginated(
-        int $doctorId,
+        string $doctorId,
         string $orderBy = 'asc',
         array $with = []
     ): LengthAwarePaginator {
@@ -29,7 +29,7 @@ class DoctorAvailabilityService
     }
 
     public function getById(
-        int $availabilityId
+        string $availabilityId
     ): DoctorAvailability {
         return DoctorAvailability::
             with('clinic')

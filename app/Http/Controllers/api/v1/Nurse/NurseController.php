@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers\api\v1\Nurse;
 
-use App\DTOs\NurseDto;
+use App\Data\Nurse\NurseDto;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreNurseRequest;
 use App\Http\Requests\UpdateNurseRequest;
@@ -30,9 +30,9 @@ class NurseController extends Controller
         );
     }
 
-    public function show($id)
+    public function show(string $id)
     {
-        $nurse = $this->nurseService->find($id, ['clinic']);
+        $nurse = $this->nurseService->getById($id, ['clinic']);
 
         return ApiResponse::success(
             message: 'Nurse fetched successfully',
@@ -51,12 +51,12 @@ class NurseController extends Controller
         );
     }
 
-    public function update(UpdateNurseRequest $request, $id)
+    public function update(UpdateNurseRequest $request, string $id)
     {
         $nurseDto = NurseDto::from($request->validated());
         $nurse    = $this->nurseService->update(
             $nurseDto,
-            $this->nurseService->find($id)
+            $this->nurseService->getById($id)
         );
 
         return ApiResponse::success(
@@ -65,9 +65,9 @@ class NurseController extends Controller
         );
     }
 
-    public function destroy($id)
+    public function destroy(string $id)
     {
-        $this->nurseService->delete($this->nurseService->find($id));
+        $this->nurseService->delete($this->nurseService->getById($id));
 
         return ApiResponse::success(
             message: 'Nurse deleted successfully'

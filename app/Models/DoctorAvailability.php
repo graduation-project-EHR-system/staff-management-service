@@ -12,6 +12,7 @@ class DoctorAvailability extends Model
 
     protected $fillable = [
         'clinic_id',
+        'doctor_id',
         'date',
         'from',
         'to',

@@ -12,6 +12,10 @@ class DoctorAvailabilityDto extends Data
     #[MapOutputName('clinic_id')]
     #[MapInputName('clinic_id')]
     public string $clinicId;
+
+    #[MapOutputName('doctor_id')]
+    #[MapInputName('doctor_id')]
+    public string $doctorId;
     public string $date;
     public string $from;
     public string $to;

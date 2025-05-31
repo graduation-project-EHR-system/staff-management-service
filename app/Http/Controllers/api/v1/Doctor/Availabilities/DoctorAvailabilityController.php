@@ -20,7 +20,7 @@ class DoctorAvailabilityController extends Controller
     ) {
     }
 
-    public function index(int $doctorId)
+    public function index(string $doctorId)
     {
         return ApiResponse::success(
             message: 'Doctor availabilities fetched successfully.',
@@ -33,7 +33,7 @@ class DoctorAvailabilityController extends Controller
         );
     }
 
-    public function show(int $availabilityId)
+    public function show(string $availabilityId)
     {
         return ApiResponse::success(
             message: 'Doctor availability fetched successfully.',
@@ -43,7 +43,7 @@ class DoctorAvailabilityController extends Controller
         );
     }
 
-    public function store(int $doctorId, StoreDoctorAvailability $request)
+    public function store(string $doctorId, StoreDoctorAvailability $request)
     {
         try {
             $doctor = $this->doctorService->getById($doctorId);
