@@ -10,6 +10,7 @@ use App\Http\Middleware\AuthMiddleware;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware([AuthMiddleware::class, AdminMiddleware::class])
+    ->withoutMiddleware([AuthMiddleware::class, AdminMiddleware::class])
     ->group(function () {
         Route::apiResource('specializations', SpecializationController::class);
         Route::apiResource('clinics', ClinicController::class);

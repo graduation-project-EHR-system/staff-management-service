@@ -39,7 +39,7 @@ class DoctorController extends Controller
         );
     }
 
-    public function show(int $id)
+    public function show(string $id)
     {
         return ApiResponse::success(
             message: 'Doctor retrieved successfully',
@@ -70,9 +70,9 @@ class DoctorController extends Controller
         );
     }
 
-    public function destroy(Doctor $doctor)
+    public function destroy(string $id)
     {
-        $this->doctorService->delete($doctor);
+        $this->doctorService->delete($this->doctorService->getById($id));
 
         return ApiResponse::success(
             message: 'Doctor deleted successfully',
