@@ -22,7 +22,9 @@ class SpecializationController extends Controller
     {
         return ApiResponse::success(
             'Specializations retrieved successfully',
-            $this->specializationService->getPaginated(),
+            $this->specializationService->getPaginated(
+                filters : request()->all()
+            ),
             SpecializationResource::class
         );
     }

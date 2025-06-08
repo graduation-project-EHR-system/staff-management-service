@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\SpecializationColor;
 use App\Models\Doctor;
+use EloquentFilter\Filterable;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -13,7 +14,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Specialization extends Model
 {
     /** @use HasFactory<\Database\Factories\SpecializationFactory> */
-    use HasFactory, HasUuids, SoftDeletes;
+    use HasFactory, HasUuids, SoftDeletes, Filterable;
 
     protected $fillable = [
         'name',
