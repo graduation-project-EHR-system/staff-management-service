@@ -48,19 +48,19 @@ class ClinicService
         $this->clinicRepository->delete($clinic);
     }
 
-    public function isActive(int $clinicId): bool
+    public function isActive(string $clinicId): bool
     {
         return $this->getById($clinicId)->is_active;
     }
 
-    public function canHoldMoreDoctors(int $clinicId): bool
+    public function canHoldMoreDoctors(string $clinicId): bool
     {
         $clinic = $this->getById($clinicId);
 
         return $clinic->current_doctors < $clinic->max_doctors;
     }
 
-    public function hasDoctor(int $clinicId, int $doctorId): bool
+    public function hasDoctor(string $clinicId, string $doctorId): bool
     {
         return $this->getById($clinicId)
             ->hasDoctor($doctorId);
