@@ -14,6 +14,7 @@ class UpdateNurseRequest extends FormRequest
     {
         $nurseId = $this->route('id') ?? $this->route('nurse');
         return [
+            'national_id' => ['sometimes', 'required', 'string', 'max:255', 'unique:nurses,national_id,' . $nurseId . ',id'],
             'first_name' => ['sometimes', 'required', 'string', 'max:255'],
             'last_name'  => ['sometimes', 'required', 'string', 'max:255'],
             'email'      => ['sometimes', 'required', 'email', 'unique:nurses,email,' . $nurseId . ',id'],

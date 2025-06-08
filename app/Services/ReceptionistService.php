@@ -76,6 +76,7 @@ class ReceptionistService
     {
         return [
             'id'        => $receptionist->id,
+            'nationalId' => $receptionist->national_id,
             'firstName' => $receptionist->first_name,
             'lastName'  => $receptionist->last_name,
             'email'     => $receptionist->email,

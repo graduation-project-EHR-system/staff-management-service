@@ -13,6 +13,7 @@ class StoreNurseRequest extends FormRequest
     public function rules()
     {
         return [
+            'national_id' => ['required', 'string', 'max:255', 'unique:nurses,national_id'],
             'first_name' => ['required', 'string', 'max:255'],
             'last_name'  => ['required', 'string', 'max:255'],
             'email'      => ['required', 'email', 'unique:nurses,email'],

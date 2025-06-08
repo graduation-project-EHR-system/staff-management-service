@@ -16,6 +16,7 @@ class NurseResource extends JsonResource
     {
         return [
             'id'         => $this->resource->id,
+            'national_id' => $this->resource->national_id,
             'first_name' => $this->resource->first_name,
             'last_name'  => $this->resource->last_name,
             'email'      => $this->resource->email,

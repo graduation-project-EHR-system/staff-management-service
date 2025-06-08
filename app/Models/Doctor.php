@@ -18,6 +18,7 @@ class Doctor extends Model
     use HasFactory, SoftDeletes, HasUuids;
 
     protected $fillable = [
+        'national_id',
         'first_name',
         'last_name',
         'email',

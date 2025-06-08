@@ -70,6 +70,7 @@ class DoctorService
     {
         return [
             'id'        => $doctor->id,
+            'nationalId' => $doctor->national_id,
             'firstName' => $doctor->first_name,
             'lastName'  => $doctor->last_name,
             'email'     => $doctor->email,

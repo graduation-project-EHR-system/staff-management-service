@@ -11,6 +11,7 @@ class Receptionist extends Model
     use HasUuids, SoftDeletes, HasFactory;
 
     protected $fillable = [
+        'national_id',
         'first_name',
         'last_name',
         'email',

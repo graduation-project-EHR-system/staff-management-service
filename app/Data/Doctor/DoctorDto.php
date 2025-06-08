@@ -9,6 +9,9 @@ use Spatie\LaravelData\Data;
 
 class DoctorDto extends Data{
     public function __construct(
+        #[MapInputName('national_id')]
+        #[MapOutputName('national_id')]
+        public ?string $nationalId,
         #[MapInputName('first_name')]
         #[MapOutputName('first_name')]
         public ?string $firstName,

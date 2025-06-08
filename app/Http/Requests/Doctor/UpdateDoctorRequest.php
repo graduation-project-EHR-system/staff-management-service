@@ -22,6 +22,7 @@ class UpdateDoctorRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'national_id' => ['nullable', 'string', 'max:255', 'unique:doctors,national_id,' . ($this->route('doctor') && is_object($this->route('doctor')) ? $this->route('doctor')->id : '')],
             'first_name' => ['nullable', 'string', 'max:50'],
             'last_name' => ['nullable', 'string', 'max:50'],
             'email' => ['nullable', 'email', 'unique:doctors,email,' . ($this->route('doctor') && is_object($this->route('doctor')) ? $this->route('doctor')->id : '')],

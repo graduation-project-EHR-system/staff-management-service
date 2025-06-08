@@ -13,6 +13,9 @@ class NurseDto extends Data
 {
     public function __construct(
         #[StringType, Max(255)]
+        public Optional|string $national_id,
+
+        #[StringType, Max(255)]
         public Optional|string $first_name,
 
         #[StringType, Max(255)]

@@ -14,6 +14,7 @@ class UpdateReceptionistRequest extends FormRequest
     {
         $receptionistId = $this->route('id') ?? $this->route('receptionist');
         return [
+            'national_id' => ['sometimes', 'required', 'string', 'max:255', 'unique:receptionists,national_id,' . $receptionistId . ',id'],
             'first_name' => ['sometimes', 'required', 'string', 'max:255'],
             'last_name'  => ['sometimes', 'required', 'string', 'max:255'],
             'email'      => ['sometimes', 'required', 'email', 'unique:receptionists,email,' . $receptionistId . ',id'],

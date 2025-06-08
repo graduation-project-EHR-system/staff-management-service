@@ -14,6 +14,7 @@ return new class extends Migration
     {
         Schema::create('doctors', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->string('national_id');
             $table->string('first_name' , 50);
             $table->string('last_name' , 50);
             $table->string('email' , 100);

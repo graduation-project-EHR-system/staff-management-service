@@ -77,6 +77,7 @@ class NurseService
     {
         return [
             'id'        => $nurse->id,
+            'nationalId' => $nurse->national_id,
             'firstName' => $nurse->first_name,
             'lastName'  => $nurse->last_name,
             'email'     => $nurse->email,
