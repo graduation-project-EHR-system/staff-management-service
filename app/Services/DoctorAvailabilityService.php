@@ -3,7 +3,10 @@
 namespace App\Services;
 
 use App\Data\DoctorAvailability\DoctorAvailabilityDto;
+use App\Data\Events\DoctorAvailabilityCreatedEvent;
+use App\Enums\KafkaTopic;
 use App\Exceptions\DoctorAvailability\InvalidAvailabilityException;
+use App\Interfaces\EventPublisher;
 use App\Models\Doctor;
 use App\Models\DoctorAvailability;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -12,7 +15,8 @@ class DoctorAvailabilityService
 {
     public function __construct(
         protected readonly DoctorService $doctorService,
-        protected readonly ClinicService $clinicService
+        protected readonly ClinicService $clinicService,
+        protected readonly EventPublisher $eventPublisher
     ) {}
 
     public function getForDoctorPaginated(
@@ -58,6 +62,11 @@ class DoctorAvailabilityService
             );
 
             $availability = $doctor->availabilities()->create($doctorAvailabilityDto->toArray());
+
+            $this->eventPublisher
+                ->onTopic(KafkaTopic::DOCTOR_AVAILABILITY_CREATED)
+                ->withBody(( new DoctorAvailabilityCreatedEvent($availability))->toArray())
+                ->publish();
 
             return $availability->load('clinic');
         } catch (InvalidAvailabilityException $e) {
