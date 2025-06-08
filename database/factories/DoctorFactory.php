@@ -21,6 +21,7 @@ class DoctorFactory extends Factory
         return [
             'first_name' => $this->faker->firstName(),
             'last_name' => $this->faker->lastName(),
+            'national_id' => $this->faker->unique()->uuid(),
             'email' => $this->faker->unique()->safeEmail(),
             'phone' => $this->faker->phoneNumber(),
             'specialization_id' => Specialization::query()->inRandomOrder()->first()->id,
