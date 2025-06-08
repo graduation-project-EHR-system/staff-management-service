@@ -3,6 +3,7 @@ namespace App\Repositories;
 
 use App\Models\Doctor;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Collection;
 
 class EloquentDoctorRepository implements DoctorRepository
 {
@@ -30,5 +31,14 @@ class EloquentDoctorRepository implements DoctorRepository
     public function delete(Doctor $doctor): void
     {
         $doctor->delete();
+    }
+
+    public function getAll(array $columns = ['*']): Collection
+    {
+        return Doctor::query()
+            ->when($columns[0] !== '*', function ($query) use ($columns) {
+                $query->select($columns);
+            })
+            ->get();
     }
 }

@@ -78,4 +78,11 @@ class DoctorController extends Controller
             message: 'Doctor deleted successfully',
         );
     }
+
+    public function lookup()
+    {
+        return ApiResponse::success(
+            data: $this->doctorService->getLookup()
+        );
+    }
 }

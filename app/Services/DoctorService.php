@@ -77,4 +77,9 @@ class DoctorService
             'role'      => UserRole::DOCTOR->name,
         ];
     }
+
+    public function getLookup()
+    {
+        return $this->doctorRepository->getAll(['id', 'first_name', 'last_name']);
+    }
 }
