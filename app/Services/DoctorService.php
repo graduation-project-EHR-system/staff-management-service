@@ -76,6 +76,7 @@ class DoctorService
             'email'     => $doctor->email,
             'phone'     => $doctor->phone,
             'role'      => UserRole::DOCTOR->name,
+            'specialization' => $doctor->specialization->name
         ];
     }
 
