@@ -24,7 +24,7 @@ class UpdateSpecializationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['nullable', 'string' , 'unique:specializations,name,' . ($this->route('specialization') && is_object($this->route('specialization')) ? $this->route('specialization')->id : ''), 'min:3' , 'max:50'],
+            'name' => ['nullable', 'string' , 'unique:specializations,name,' . $this->route('specialization'), 'min:3' , 'max:50'],
             'description' => ['nullable' , 'string', 'min:3' , 'max:255'],
             'color' => ['nullable', 'string', Rule::enum(SpecializationColor::class)]
         ];
