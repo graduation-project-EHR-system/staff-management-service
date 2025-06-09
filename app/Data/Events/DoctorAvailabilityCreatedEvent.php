@@ -14,6 +14,7 @@ class DoctorAvailabilityCreatedEvent
         return [
             'doctor_id' => $this->doctorAvailability->doctor_id,
             'availability_id' => $this->doctorAvailability->id,
+            'clinic_name' => $this->doctorAvailability->clinic->name,
             'clinic_id' => $this->doctorAvailability->clinic_id,
             'date' => $this->doctorAvailability->date,
             'from' => $this->doctorAvailability->from,
