@@ -8,7 +8,7 @@ class EloquentClinicRepository implements ClinicRepository
 {
     public function getPaginated(int $perPage = 15, array $with = [], array $filters = []): LengthAwarePaginator
     {
-        return Clinic::with($with)->filter($filters)->paginate($perPage);
+        return Clinic::with($with)->latest()->filter($filters)->paginate($perPage);
     }
 
     public function getById(string $id, array $with = []): Clinic

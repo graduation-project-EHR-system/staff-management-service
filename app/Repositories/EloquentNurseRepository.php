@@ -8,7 +8,7 @@ class EloquentNurseRepository implements NurseRepository
 {
     public function getPaginated(int $perPage = 15, array $with = []): LengthAwarePaginator
     {
-        return Nurse::with($with)->paginate($perPage);
+        return Nurse::with($with)->latest()->paginate($perPage);
     }
 
     public function getById(string $id, array $with = []): Nurse

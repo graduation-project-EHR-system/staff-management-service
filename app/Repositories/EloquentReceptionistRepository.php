@@ -8,7 +8,7 @@ class EloquentReceptionistRepository implements ReceptionistRepository
 {
     public function getPaginated(int $perPage = 15, array $with = []): LengthAwarePaginator
     {
-        return Receptionist::with($with)->paginate($perPage);
+        return Receptionist::with($with)->latest()->paginate($perPage);
     }
 
     public function getById(string $id, array $with = []): Receptionist

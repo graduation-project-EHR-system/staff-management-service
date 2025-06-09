@@ -9,7 +9,9 @@ class EloquentDoctorRepository implements DoctorRepository
 {
     public function getPaginated(int $perPage = 15, array $with = []): LengthAwarePaginator
     {
-        return Doctor::with($with)->paginate($perPage);
+        return Doctor::with($with)
+            ->latest()
+            ->paginate($perPage);
     }
 
     public function getById(string $id, array $with = []): Doctor

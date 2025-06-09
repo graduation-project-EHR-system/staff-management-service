@@ -8,7 +8,7 @@ class EloquentSpecializationRepository implements SpecializationRepository
 {
     public function getPaginated(int $perPage = 15, array $with = [], array $filters = []): LengthAwarePaginator
     {
-        return Specialization::with($with)->filter($filters)->paginate($perPage);
+        return Specialization::with($with)->latest()->filter($filters)->paginate($perPage);
     }
 
     public function getById(string $id, array $with = []): Specialization
