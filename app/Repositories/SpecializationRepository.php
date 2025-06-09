@@ -12,4 +12,5 @@ interface SpecializationRepository
     public function create(SpecializationDto $specializationDto): Specialization;
     public function update(Specialization $specialization, SpecializationDto $specializationDto): Specialization;
     public function delete(Specialization $specialization): void;
+    public function getAllCount() : int;
 }

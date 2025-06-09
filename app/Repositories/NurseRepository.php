@@ -12,4 +12,5 @@ interface NurseRepository
     public function create(NurseDto $nurseDto): Nurse;
     public function update(Nurse $nurse, NurseDto $nurseDto): Nurse;
     public function delete(Nurse $nurse): void;
+    public function getAllCount() : int;
 }

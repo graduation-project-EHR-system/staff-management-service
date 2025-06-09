@@ -31,4 +31,9 @@ class EloquentReceptionistRepository implements ReceptionistRepository
     {
         $receptionist->delete();
     }
+
+    public function getAllCount() : int
+    {
+        return Receptionist::count();
+    }
 }

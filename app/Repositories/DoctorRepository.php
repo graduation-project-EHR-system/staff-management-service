@@ -14,4 +14,5 @@ interface DoctorRepository
     public function update(Doctor $doctor, DoctorDto $doctorDto): Doctor;
     public function delete(Doctor $doctor): void;
     public function getAll(array $columns = ['*']): Collection;
+    public function getAllCount(): int;
 }

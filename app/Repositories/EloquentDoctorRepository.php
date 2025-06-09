@@ -41,4 +41,9 @@ class EloquentDoctorRepository implements DoctorRepository
             })
             ->get();
     }
+
+    public function getAllCount(): int
+    {
+        return Doctor::count();
+    }
 }

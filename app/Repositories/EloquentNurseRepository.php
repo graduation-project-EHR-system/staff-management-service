@@ -31,4 +31,9 @@ class EloquentNurseRepository implements NurseRepository
     {
         $nurse->delete();
     }
+
+    public function getAllCount(): int
+    {
+        return Nurse::count();
+    }
 }

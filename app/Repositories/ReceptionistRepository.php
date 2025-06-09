@@ -12,4 +12,6 @@ interface ReceptionistRepository
     public function create(ReceptionistDto $receptionistDto): Receptionist;
     public function update(Receptionist $receptionist, ReceptionistDto $receptionistDto): Receptionist;
     public function delete(Receptionist $receptionist): void;
+    public function getAllCount(): int;
+
 }

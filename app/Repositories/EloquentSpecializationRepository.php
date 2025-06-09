@@ -31,4 +31,9 @@ class EloquentSpecializationRepository implements SpecializationRepository
     {
         $specialization->delete();
     }
+
+    public function getAllCount(): int
+    {
+        return Specialization::count();
+    }
 }

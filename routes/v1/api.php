@@ -3,6 +3,7 @@
 use App\Http\Controllers\api\v1\Clinic\ClinicController;
 use App\Http\Controllers\api\v1\Doctor\Availabilities\DoctorAvailabilityController;
 use App\Http\Controllers\api\v1\Doctor\DoctorController;
+use App\Http\Controllers\Api\v1\GetAnalyticsController;
 use App\Http\Controllers\api\v1\Nurse\NurseController;
 use App\Http\Controllers\api\v1\Specialization\SpecializationController;
 use App\Http\Middleware\AdminMiddleware;
@@ -21,4 +22,6 @@ Route::middleware([AuthMiddleware::class, AdminMiddleware::class])
 
         Route::apiResource('nurses', NurseController::class);
         Route::apiResource('receptionists', \App\Http\Controllers\api\v1\Receptionist\ReceptionistController::class);
+
+        Route::get('analytics' , GetAnalyticsController::class);
     });
