@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Doctor;
 
+use App\Rules\UniqueGlobally;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreDoctorRequest extends FormRequest
@@ -22,11 +23,11 @@ class StoreDoctorRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'national_id' => ['required', 'string', 'max:255', 'unique:doctors,national_id'],
+            'national_id' => ['required', 'string', 'max:255', new UniqueGlobally('national_id')],
             'first_name' => ['required', 'string', 'max:50'],
             'last_name' => ['required', 'string', 'max:50'],
-            'email' => ['required', 'email', 'unique:doctors,email'],
-            'phone' => ['required', 'string', 'max:15', 'unique:doctors,phone'],
+            'email' => ['required', 'email', new UniqueGlobally('email')],
+            'phone' => ['required', 'string', 'max:15', new UniqueGlobally('phone')],
             'specialization_id' => ['required', 'exists:specializations,id'],
             'is_active' => ['nullable', 'boolean'],
         ];
