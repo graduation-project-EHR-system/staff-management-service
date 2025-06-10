@@ -7,9 +7,10 @@ use Illuminate\Database\Eloquent\Collection;
 
 class EloquentDoctorRepository implements DoctorRepository
 {
-    public function getPaginated(int $perPage = 15, array $with = []): LengthAwarePaginator
+    public function getPaginated(int $perPage = 15, array $with = [], array $filters = []): LengthAwarePaginator
     {
         return Doctor::with($with)
+            ->filter($filters)
             ->latest()
             ->paginate($perPage);
     }

@@ -6,9 +6,13 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class EloquentReceptionistRepository implements ReceptionistRepository
 {
-    public function getPaginated(int $perPage = 15, array $with = []): LengthAwarePaginator
+    public function getPaginated(int $perPage = 15, array $with = [], array $filters = []): LengthAwarePaginator
     {
-        return Receptionist::with($with)->latest()->paginate($perPage);
+return Receptionist::with($with)
+    ->filter($filters)
+    ->latest()
+    ->paginate($perPage);
+
     }
 
     public function getById(string $id, array $with = []): Receptionist

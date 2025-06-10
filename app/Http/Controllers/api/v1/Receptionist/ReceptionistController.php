@@ -21,7 +21,9 @@ class ReceptionistController extends Controller
     {
         return ApiResponse::success(
             message: 'Receptionists fetched successfully',
-            data: $this->receptionistService->getPaginated(),
+            data: $this->receptionistService->getPaginated(
+                filters: $request->all()
+            ),
             resource: ReceptionistResource::class
         );
     }

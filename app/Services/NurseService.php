@@ -25,9 +25,11 @@ class NurseService
 
     public function getPaginated(
         int $perPage = 15,
-        array $with = []
+        array $with = [],
+        array $filters = []
     ): LengthAwarePaginator {
-        return $this->nurseRepository->getPaginated($perPage, $with);
+return $this->nurseRepository->getPaginated($perPage, $with, $filters);
+
     }
 
     public function getById(

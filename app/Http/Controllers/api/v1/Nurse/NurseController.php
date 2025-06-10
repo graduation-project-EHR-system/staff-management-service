@@ -24,7 +24,8 @@ class NurseController extends Controller
         return ApiResponse::success(
             message: 'Nurses fetched successfully',
             data: $this->nurseService->getPaginated(
-                with: ['clinic']
+                with: ['clinic'],
+                filters: $request->all()
             ),
             resource: NurseResource::class
         );

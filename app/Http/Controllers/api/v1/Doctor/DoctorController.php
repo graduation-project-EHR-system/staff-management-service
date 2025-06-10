@@ -21,7 +21,8 @@ class DoctorController extends Controller
     {
         return ApiResponse::success(
             data: $this->doctorService->getPaginated(
-                with: ['specialization']
+                with: ['specialization'],
+                filters: request()->all()
             ),
             resource: DoctorResource::class
         );

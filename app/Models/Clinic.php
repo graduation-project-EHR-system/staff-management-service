@@ -18,7 +18,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Clinic extends Model
 {
     /** @use HasFactory<\Database\Factories\ClinicFactory> */
-    use HasFactory, Filterable, HasUuids, SoftDeletes;
+    use HasFactory, Filterable, HasUuids, SoftDeletes, Filterable;
 
     protected $fillable = [
         'name',

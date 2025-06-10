@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use EloquentFilter\Filterable;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -10,7 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Nurse extends Model
 {
-    use HasUuids, SoftDeletes, HasFactory;
+    use HasUuids, SoftDeletes, HasFactory, Filterable;
 
     protected $fillable = [
         'national_id',

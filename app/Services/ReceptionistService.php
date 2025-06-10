@@ -24,9 +24,11 @@ class ReceptionistService
 
     public function getPaginated(
         int $perPage = 15,
-        array $with = []
+        array $with = [],
+        array $filters = []
     ): LengthAwarePaginator {
-        return $this->receptionistRepository->getPaginated($perPage, $with);
+return $this->receptionistRepository->getPaginated($perPage, $with, $filters);
+
     }
 
     public function getById(

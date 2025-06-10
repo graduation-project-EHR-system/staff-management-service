@@ -7,7 +7,7 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 interface NurseRepository
 {
-    public function getPaginated(int $perPage = 15, array $with = []): LengthAwarePaginator;
+    public function getPaginated(int $perPage = 15, array $with = [], array $filters = []): LengthAwarePaginator;
     public function getById(string $id, array $with = []): Nurse;
     public function create(NurseDto $nurseDto): Nurse;
     public function update(Nurse $nurse, NurseDto $nurseDto): Nurse;

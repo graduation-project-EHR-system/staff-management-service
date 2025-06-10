@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Collection;
 
 interface DoctorRepository
 {
-    public function getPaginated(int $perPage = 15, array $with = []): LengthAwarePaginator;
+    public function getPaginated(int $perPage = 15, array $with = [], array $filters = []): LengthAwarePaginator;
     public function getById(string $id, array $with = []): Doctor;
     public function create(DoctorDto $doctorDto): Doctor;
     public function update(Doctor $doctor, DoctorDto $doctorDto): Doctor;

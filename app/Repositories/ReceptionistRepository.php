@@ -7,7 +7,7 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 interface ReceptionistRepository
 {
-    public function getPaginated(int $perPage = 15, array $with = []): LengthAwarePaginator;
+    public function getPaginated(int $perPage = 15, array $with = [], array $filters = []): LengthAwarePaginator;
     public function getById(string $id, array $with = []): Receptionist;
     public function create(ReceptionistDto $receptionistDto): Receptionist;
     public function update(Receptionist $receptionist, ReceptionistDto $receptionistDto): Receptionist;
