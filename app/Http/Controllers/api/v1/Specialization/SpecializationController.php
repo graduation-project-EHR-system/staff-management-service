@@ -54,8 +54,10 @@ class SpecializationController extends Controller
         );
     }
 
-    public function update(UpdateSpecializationRequest $request, Specialization $specialization)
+    public function update(UpdateSpecializationRequest $request, string $id)
     {
+        $specialization = $this->specializationService->getById($id);
+
         $specialization = $this->specializationService->update(
             SpecializationDto::from(
                 array_merge(
@@ -72,8 +74,10 @@ class SpecializationController extends Controller
         );
     }
 
-    public function destroy(Specialization $specialization)
+    public function destroy(string $id)
     {
+        $specialization = $this->specializationService->getById($id);
+
         $this->specializationService->delete($specialization);
 
         return ApiResponse::success(
