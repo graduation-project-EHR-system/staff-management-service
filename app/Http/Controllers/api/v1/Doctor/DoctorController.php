@@ -53,8 +53,10 @@ class DoctorController extends Controller
         );
     }
 
-    public function update(UpdateDoctorRequest $request, Doctor $doctor)
+    public function update(UpdateDoctorRequest $request, string $id)
     {
+        $doctor = $this->doctorService->getById($id);
+
         $updatedDoctor = $this->doctorService->update(
             DoctorDto::from(
                 array_merge(

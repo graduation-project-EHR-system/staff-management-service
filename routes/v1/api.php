@@ -16,7 +16,7 @@ Route::middleware([AuthMiddleware::class, AdminMiddleware::class])
         Route::apiResource('clinics', ClinicController::class);
 
         Route::apiResource('doctors', DoctorController::class);
-        Route::get('lookup/doctors', [DoctorController::class, 'lookup']);
+        Route::get('lookup/doctors', [DoctorController::class, 'lookup'])->name('doctors.lookup');
         Route::apiResource('doctors/{doctor}/availabilities', DoctorAvailabilityController::class)
             ->only(['index', 'show', 'store']);
 

@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Doctor;
+use App\Models\DoctorAvailability;
 use App\Models\Specialization;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -27,5 +29,14 @@ class DoctorFactory extends Factory
             'specialization_id' => Specialization::query()->inRandomOrder()->first()->id,
             'is_active' => $this->faker->boolean(chanceOfGettingTrue: 90),
         ];
+    }
+
+    public function withAvailabilities(int $count = 3): self
+    {
+        return $this->afterCreating(function (Doctor $doctor) use ($count) {
+            DoctorAvailability::factory()->count($count)->create([
+                'doctor_id' => $doctor->id,
+            ]);
+        });
     }
 }
