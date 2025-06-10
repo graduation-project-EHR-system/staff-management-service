@@ -4,6 +4,7 @@ use App\Models\Doctor;
 use App\Models\Nurse;
 use App\Models\Receptionist;
 use App\Models\Specialization;
+use Symfony\Component\HttpFoundation\Response;
 
 beforeEach(function () {
     $this->specialization = Specialization::factory()->create();
@@ -18,9 +19,9 @@ test('can get staff analytics', function () {
     Nurse::factory()->count(2)->create();
     Receptionist::factory()->count(1)->create();
 
-    $response = $this->getJson('/api/v1/analytics');
+    $response = $this->getJson(route('analytics'));
 
-    $response->assertStatus(200)
+    $response->assertStatus(Response::HTTP_OK)
         ->assertJsonStructure([
             'data' => [
                 'num_of_doctors',
