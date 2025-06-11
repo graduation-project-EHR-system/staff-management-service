@@ -40,7 +40,7 @@ class Clinic extends Model
         );
     }
 
-    public function hasDoctor(int $doctorId): bool
+    public function hasDoctor(string $doctorId): bool
     {
         return $this->doctors()->where('doctor_id', $doctorId)->exists();
     }
