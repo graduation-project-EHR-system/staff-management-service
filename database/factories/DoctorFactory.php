@@ -26,7 +26,7 @@ class DoctorFactory extends Factory
             'national_id' => $this->faker->unique()->uuid(),
             'email' => $this->faker->unique()->safeEmail(),
             'phone' => $this->faker->phoneNumber(),
-            'specialization_id' => Specialization::query()->inRandomOrder()->first()->id,
+            'specialization_id' => Specialization::factory()->create()->id,
             'is_active' => $this->faker->boolean(chanceOfGettingTrue: 90),
         ];
     }
