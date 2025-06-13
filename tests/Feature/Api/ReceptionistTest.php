@@ -1,5 +1,6 @@
 <?php
 
+use App\Interfaces\EventPublisher;
 use App\Models\Receptionist;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -59,6 +60,17 @@ test('can create a receptionist', function () {
         'is_active'   => true,
     ];
 
+
+    $this->mock(EventPublisher::class)
+        ->shouldReceive('onTopic')
+        ->once()
+        ->andReturnSelf()
+        ->shouldReceive('withBody')
+        ->once()
+        ->andReturnSelf()
+        ->shouldReceive('publish')
+        ->once();
+
     $response = $this->postJson(route('receptionists.store'), $receptionistData);
 
     $response->assertStatus(Response::HTTP_CREATED)
@@ -92,6 +104,17 @@ test('can update a receptionist', function () {
         'is_active'   => true,
     ];
 
+    $this->mock(EventPublisher::class)
+        ->shouldReceive('onTopic')
+        ->once()
+        ->andReturnSelf()
+        ->shouldReceive('withBody')
+        ->once()
+        ->andReturnSelf()
+        ->shouldReceive('publish')
+        ->once();
+
+
     $response = $this->putJson(route('receptionists.update', $receptionist->id), $updatedData);
 
     $response->assertStatus(Response::HTTP_OK)
@@ -115,6 +138,17 @@ test('can update a receptionist', function () {
 
 test('can delete a receptionist', function () {
     $receptionist = Receptionist::factory()->create();
+
+
+    $this->mock(EventPublisher::class)
+        ->shouldReceive('onTopic')
+        ->once()
+        ->andReturnSelf()
+        ->shouldReceive('withBody')
+        ->once()
+        ->andReturnSelf()
+        ->shouldReceive('publish')
+        ->once();
 
     $response = $this->deleteJson(route('receptionists.destroy', $receptionist->id));
 

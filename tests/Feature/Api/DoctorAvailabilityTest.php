@@ -1,5 +1,6 @@
 <?php
 
+use App\Interfaces\EventPublisher;
 use App\Models\Clinic;
 use App\Models\Doctor;
 use App\Models\DoctorAvailability;
@@ -56,6 +57,18 @@ test('can create a doctor availability', function () {
         'from' => '09:00',
         'to'   => '17:00',
     ];
+
+
+    $this->mock(EventPublisher::class)
+        ->shouldReceive('onTopic')
+        ->once()
+        ->andReturnSelf()
+        ->shouldReceive('withBody')
+        ->once()
+        ->andReturnSelf()
+        ->shouldReceive('publish')
+        ->once();
+
 
     $response = $this->postJson("/api/v1/doctors/{$this->doctor->id}/availabilities", $availabilityData);
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Interfaces\EventPublisher;
 use App\Models\Clinic;
 use App\Models\Nurse;
 use Symfony\Component\HttpFoundation\Response;
@@ -68,6 +69,16 @@ test('can create a nurse', function () {
         'is_active'   => true,
     ];
 
+    $this->mock(EventPublisher::class)
+        ->shouldReceive('onTopic')
+        ->once()
+        ->andReturnSelf()
+        ->shouldReceive('withBody')
+        ->once()
+        ->andReturnSelf()
+        ->shouldReceive('publish')
+        ->once();
+
     $response = $this->postJson(route('nurses.store'), $nurseData);
 
     $response->assertStatus(Response::HTTP_CREATED)
@@ -104,6 +115,17 @@ test('can update a nurse', function () {
         'is_active'   => true,
     ];
 
+
+    $this->mock(EventPublisher::class)
+        ->shouldReceive('onTopic')
+        ->once()
+        ->andReturnSelf()
+        ->shouldReceive('withBody')
+        ->once()
+        ->andReturnSelf()
+        ->shouldReceive('publish')
+        ->once();
+
     $response = $this->putJson(route('nurses.update', $nurse->id), $updatedData);
 
     $response->assertStatus(Response::HTTP_OK)
@@ -129,6 +151,17 @@ test('can delete a nurse', function () {
     $nurse = Nurse::factory()->create([
         'clinic_id' => $this->clinic->id,
     ]);
+
+
+    $this->mock(EventPublisher::class)
+        ->shouldReceive('onTopic')
+        ->once()
+        ->andReturnSelf()
+        ->shouldReceive('withBody')
+        ->once()
+        ->andReturnSelf()
+        ->shouldReceive('publish')
+        ->once();
 
     $response = $this->deleteJson(route('nurses.destroy', $nurse->id));
 
